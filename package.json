@@ -1,5 +1,6 @@
 {
   "name": "gametracker-frontend",
+  "homepage": "https://sebastianbastidasricardo.github.io/GameTracker-JC-Frotend---Bastidas-Sebastian",
   "version": "1.0.0",
   "description": "Frontend React para GameTracker - Biblioteca Personal de Videojuegos",
   "private": true,
@@ -14,7 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
