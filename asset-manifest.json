@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/GameTracker-JC-Frotend---Bastidas-Sebastian/static/css/main.ca59d875.css",
+    "main.js": "/GameTracker-JC-Frotend---Bastidas-Sebastian/static/js/main.769c53fd.js",
+    "index.html": "/GameTracker-JC-Frotend---Bastidas-Sebastian/index.html",
+    "main.ca59d875.css.map": "/GameTracker-JC-Frotend---Bastidas-Sebastian/static/css/main.ca59d875.css.map",
+    "main.769c53fd.js.map": "/GameTracker-JC-Frotend---Bastidas-Sebastian/static/js/main.769c53fd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca59d875.css",
+    "static/js/main.769c53fd.js"
+  ]
+}
