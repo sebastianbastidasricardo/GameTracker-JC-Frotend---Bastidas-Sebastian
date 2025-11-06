@@ -30,7 +30,7 @@ export const GameProvider = ({ children }) => {
   const loadReviews = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/reseñas`);
+      const response = await axios.get(`${API_URL}/reviews`);
       setReviews(response.data);
       setError(null);
     } catch (err) {
@@ -80,31 +80,43 @@ export const GameProvider = ({ children }) => {
   // Agregar reseña
   const addReview = async (reviewData) => {
     try {
-      const response = await axios.post(`${API_URL}/reseñas`, reviewData);
+      console.log('Enviando reseña a:', `${API_URL}/reviews`);
+      console.log('Datos de la reseña:', reviewData);
+      const response = await axios.post(`${API_URL}/reviews`, reviewData);
       setReviews([...reviews, response.data]);
       return response.data;
     } catch (err) {
-      setError('Error al agregar la reseña');
-      throw err;
+      const errorMessage = err.response?.data?.error || err.message || 'Error al agregar la reseña';
+      setError(errorMessage);
+      console.error('Error detallado:', {
+        status: err.response?.status,
+        statusText: err.response?.statusText,
+        data: err.response?.data,
+        message: err.message,
+        url: err.config?.url
+      });
+      throw new Error(errorMessage);
     }
   };
 
   // Actualizar reseña
   const updateReview = async (id, reviewData) => {
     try {
-      const response = await axios.put(`${API_URL}/reseñas/${id}`, reviewData);
+      const response = await axios.put(`${API_URL}/reviews/${id}`, reviewData);
       setReviews(reviews.map(review => review._id === id ? response.data : review));
       return response.data;
     } catch (err) {
-      setError('Error al actualizar la reseña');
-      throw err;
+      const errorMessage = err.response?.data?.error || err.message || 'Error al actualizar la reseña';
+      setError(errorMessage);
+      console.error('Error detallado:', err.response?.data || err);
+      throw new Error(errorMessage);
     }
   };
 
   // Eliminar reseña
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`${API_URL}/reseñas/${id}`);
+      await axios.delete(`${API_URL}/reviews/${id}`);
       setReviews(reviews.filter(review => review._id !== id));
     } catch (err) {
       setError('Error al eliminar la reseña');

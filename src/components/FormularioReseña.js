@@ -81,7 +81,8 @@ const FormularioReseña = ({ review, selectedGame, onClose, games }) => {
       onClose();
     } catch (error) {
       console.error('Error al guardar:', error);
-      setErrors({ submit: 'Error al guardar la reseña' });
+      const errorMessage = error.response?.data?.error || error.message || 'Error al guardar la reseña';
+      setErrors({ submit: errorMessage });
     }
   };
 
