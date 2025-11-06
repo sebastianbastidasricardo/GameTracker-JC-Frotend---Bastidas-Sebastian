@@ -1,0 +1,171 @@
+.reseñas-container {
+  padding: 2rem 0;
+}
+
+.reseñas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reseñas-header h1 {
+  color: white;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.reseñas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.reseña-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.dark-mode .reseña-card {
+  background: rgba(26, 32, 44, 0.95);
+}
+
+.reseña-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.reseña-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reseña-juego-info h3 {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dark-mode .reseña-juego-info h3 {
+  color: var(--text-light);
+}
+
+.reseña-fecha {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.reseña-puntuacion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.estrella {
+  font-size: 1.5rem;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+.estrella.activa {
+  opacity: 1;
+}
+
+.puntuacion-numero {
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.reseña-detalles {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.detalle-item {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.detalle-item strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.dark-mode .detalle-item strong {
+  color: var(--text-light);
+}
+
+.reseña-texto {
+  background: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.dark-mode .reseña-texto {
+  background: var(--bg-white);
+}
+
+.reseña-texto p {
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.dark-mode .reseña-texto p {
+  color: var(--text-light);
+}
+
+.reseña-acciones {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.empty-state p:first-child {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: white;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .reseñas-header h1 {
+    font-size: 2rem;
+  }
+
+  .reseña-header-card {
+    flex-direction: column;
+  }
+
+  .reseña-detalles {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
