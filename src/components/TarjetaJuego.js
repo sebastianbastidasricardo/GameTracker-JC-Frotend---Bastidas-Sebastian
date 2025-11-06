@@ -1,9 +1,52 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { GameContext } from '../context/GameContext';
 import './TarjetaJuego.css';
 
 const TarjetaJuego = ({ game, onEdit }) => {
   const { updateGame, deleteGame } = useContext(GameContext);
+  const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageSrc, setImageSrc] = useState('');
+
+  // Validar y establecer la URL de la imagen
+  useEffect(() => {
+    if (game.imagenPortada && game.imagenPortada.trim() !== '') {
+      const url = game.imagenPortada.trim();
+      // Validar que sea una URL válida
+      try {
+        new URL(url);
+        setImageSrc(url);
+        setImageError(false);
+        setImageLoading(true);
+      } catch (e) {
+        // URL inválida
+        console.warn('URL de imagen inválida:', url);
+        setImageSrc('');
+        setImageError(true);
+        setImageLoading(false);
+      }
+    } else {
+      setImageSrc('');
+      setImageError(true);
+      setImageLoading(false);
+    }
+  }, [game.imagenPortada]);
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+    console.log('✅ Imagen cargada correctamente:', game.imagenPortada);
+  };
+
+  const handleImageError = (e) => {
+    console.warn('❌ Error al cargar imagen:', game.imagenPortada);
+    setImageError(true);
+    setImageLoading(false);
+    // Prevenir bucle infinito
+    if (e.target.src !== 'https://via.placeholder.com/300x400?text=No+Image') {
+      e.target.src = 'https://via.placeholder.com/300x400?text=No+Image';
+    }
+  };
 
   const handleToggleCompletado = async () => {
     try {
@@ -23,15 +66,26 @@ const TarjetaJuego = ({ game, onEdit }) => {
     }
   };
 
+  // Determinar qué imagen mostrar
+  const displayImage = imageError || !imageSrc 
+    ? 'https://via.placeholder.com/300x400?text=No+Image' 
+    : imageSrc;
+
   return (
     <div className={`tarjeta-juego ${game.completado ? 'completado' : ''}`}>
       <div className="tarjeta-imagen">
+        {imageLoading && imageSrc && (
+          <div className="image-loading">
+            <div className="spinner"></div>
+            <p>Cargando imagen...</p>
+          </div>
+        )}
         <img 
-          src={game.imagenPortada || 'https://via.placeholder.com/300x400?text=No+Image'} 
+          src={displayImage}
           alt={game.titulo}
-          onError={(e) => {
-            e.target.src = 'https://via.placeholder.com/300x400?text=No+Image';
-          }}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          style={{ display: imageLoading && imageSrc ? 'none' : 'block' }}
         />
         {game.completado && (
           <div className="badge-completado">✅ Completado</div>
@@ -77,4 +131,3 @@ const TarjetaJuego = ({ game, onEdit }) => {
 };
 
 export default TarjetaJuego;
-
